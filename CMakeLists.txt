@@ -11,4 +11,4 @@ add_executable(${PROJECT_NAME}
 
 include_directories(src)
 
-include_directories(${CMAKE_SOURCE_DIR}/lib/SFML)
+include_directories(${CMAKE_SOURCE_DIR}/lib/SFML-3.0.0/include)
