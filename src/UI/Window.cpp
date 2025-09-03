@@ -18,7 +18,7 @@ Window::Window(): sprites(WIDTH, std::vector<sf::Sprite>(HEIGHT, sf::Sprite())) 
             sprites[x][y].setPosition(xPos, yPos);
 
 
-            sprites[x][y].setTexture(manager.getTexture(Player));
+            sprites[x][y].setTexture(manager.getTexture(Textures::Player));
             sprites[x][y].setScale(0.01f, 0.01f);
         }
     }

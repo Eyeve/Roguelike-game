@@ -4,14 +4,16 @@
 
 #include "TextureManager.h"
 
-TextureManager::TextureManager(): textureVec(TextureCount, sf::Texture()) {
+#include <utility>
+
+TextureManager::TextureManager(): textureVec(enumSize<Textures>(), sf::Texture()) {
 
 }
 
 
 int TextureManager::init()
 {
-    for (int i = 0; i < TextureCount; ++i) {
+    for (int i = 0; i < enumSize<Textures>(); ++i) {
         if (textureVec[i].loadFromFile("../assets/player.png"))
             return -1;
     }
@@ -21,5 +23,5 @@ int TextureManager::init()
 
 const sf::Texture& TextureManager::getTexture(Textures texture)
 {
-    return textureVec[texture];
+    return textureVec[std::to_underlying(texture)];
 }

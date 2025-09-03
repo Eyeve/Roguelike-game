@@ -5,16 +5,22 @@
 #ifndef ROGUELIKE_GAME_TEXTUREMANAGER_H
 #define ROGUELIKE_GAME_TEXTUREMANAGER_H
 
+#include <utility>
 #include <SFML/Graphics.hpp>
 
-enum Textures
+enum class Textures
 {
     Player,
     Ground,
     Wall,
 
-    TextureCount
+    Size
 };
+
+template<typename T>
+int enumSize() {
+    return std::to_underlying(T::Size);
+}
 
 struct TextureManager {
 public:
