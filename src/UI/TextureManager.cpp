@@ -14,7 +14,7 @@ TextureManager::TextureManager(): textureVec(enumSize<Textures>(), sf::Texture()
 int TextureManager::init()
 {
     for (int i = 0; i < enumSize<Textures>(); ++i) {
-        if (textureVec[i].loadFromFile("../assets/player.png"))
+        if (textureVec[i].loadFromFile("../assets/wall.png"))
             return -1;
     }
     return 0;
