@@ -9,19 +9,23 @@
 
 enum Textures
 {
-    player,
-    ground,
-    wall
+    Player,
+    Ground,
+    Wall,
+
+    TextureCount
 };
 
 struct TextureManager {
 public:
-
     TextureManager();
 
     int init();
 
-    static const sf::Texture* getTexture(Textures texture);
+    const sf::Texture& getTexture(Textures texture);
+
+private:
+    std::vector<sf::Texture> textureVec;
 };
 
 

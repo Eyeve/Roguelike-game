@@ -4,19 +4,22 @@
 
 #include "TextureManager.h"
 
-TextureManager::TextureManager()
-= default;
+TextureManager::TextureManager(): textureVec(TextureCount, sf::Texture()) {
+
+}
 
 
 int TextureManager::init()
 {
+    for (int i = 0; i < TextureCount; ++i) {
+        if (textureVec[i].loadFromFile("../assets/player.png"))
+            return -1;
+    }
     return 0;
 }
 
 
-const sf::Texture* TextureManager::getTexture(const Textures texture)
+const sf::Texture& TextureManager::getTexture(Textures texture)
 {
-    auto* texturePtr = new sf::Texture();
-    texturePtr->loadFromFile("../assets/" + std::to_string(texture));
-    return texturePtr;
+    return textureVec[texture];
 }

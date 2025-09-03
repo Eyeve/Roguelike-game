@@ -9,7 +9,7 @@ Window::Window(): sprites(WIDTH, std::vector<sf::Sprite>(HEIGHT, sf::Sprite())) 
     window.setFramerateLimit(FRAME_LIMIT);
     view = window.getDefaultView();
 
-    texture.loadFromFile("../assets/player.png");
+    manager.init();
 
     for (uint32_t x = 0; x < WIDTH; ++x) {
         for (uint32_t y = 0; y < HEIGHT; ++y) {
@@ -18,7 +18,7 @@ Window::Window(): sprites(WIDTH, std::vector<sf::Sprite>(HEIGHT, sf::Sprite())) 
             sprites[x][y].setPosition(xPos, yPos);
 
 
-            sprites[x][y].setTexture(texture);
+            sprites[x][y].setTexture(manager.getTexture(Player));
             sprites[x][y].setScale(0.01f, 0.01f);
         }
     }

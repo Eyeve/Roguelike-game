@@ -3,6 +3,8 @@
 
 #include <cinttypes>
 
+#include "TextureManager.h"
+
 
 class Window {
 public:
@@ -21,7 +23,7 @@ private:
     sf::RenderWindow window;
     sf::View view;
     std::vector<std::vector<sf::Sprite>> sprites;
-    sf::Texture texture;
+    TextureManager manager;
 };
 
 
