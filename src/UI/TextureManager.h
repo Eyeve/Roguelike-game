@@ -7,15 +7,21 @@
 
 #include <SFML/Graphics.hpp>
 
+enum Textures
+{
+    player,
+    ground,
+    wall
+};
 
 struct TextureManager {
 public:
-    sf::Texture player;
-
 
     TextureManager();
 
     int init();
+
+    static const sf::Texture* getTexture(Textures texture);
 };
 
 
