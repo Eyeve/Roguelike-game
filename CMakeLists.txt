@@ -34,12 +34,19 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(sfml)
 
+
+
+FetchContent_Declare(
+        magic_enum
+        GIT_REPOSITORY https://github.com/Neargye/magic_enum.git
+        GIT_TAG        v0.9.5)
+FetchContent_MakeAvailable(magic_enum)
 target_link_libraries(${PROJECT_NAME}
         sfml-graphics
         sfml-window
         sfml-system
+        magic_enum::magic_enum
 )
-
 if(WIN32)
     target_compile_definitions(${PROJECT_NAME} PRIVATE SFML_STATIC)
 
@@ -52,3 +59,5 @@ if(WIN32)
 elseif(UNIX AND NOT APPLE)
     find_package(X11 REQUIRED)
 endif()
+
+

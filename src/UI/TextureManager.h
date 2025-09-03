@@ -11,10 +11,8 @@
 enum class Textures
 {
     Player,
-    Ground,
     Wall,
-
-    Size
+    Troll
 };
 
 template<typename T>

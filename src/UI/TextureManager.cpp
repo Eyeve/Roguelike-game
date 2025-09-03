@@ -3,19 +3,29 @@
 //
 
 #include "TextureManager.h"
-
+#include <iostream>
+#include <magic_enum.hpp>
 #include <utility>
 
-TextureManager::TextureManager(): textureVec(enumSize<Textures>(), sf::Texture()) {
+TextureManager::TextureManager(): textureVec(magic_enum::enum_values<Textures>().size(), sf::Texture()) {
 
 }
 
 
 int TextureManager::init()
 {
-    for (int i = 0; i < enumSize<Textures>(); ++i) {
-        if (textureVec[i].loadFromFile("../assets/wall.png"))
+
+    for (auto t : magic_enum::enum_values<Textures>()) {
+        auto idx_opt = magic_enum::enum_index(t);
+        if (!idx_opt) continue; // на всякий случай
+
+        std::size_t idx = *idx_opt;
+        std::string path = "../assets/" + std::string(magic_enum::enum_name(t)) + ".png";
+
+        if (!textureVec[idx].loadFromFile(path)) {
+            std::cerr << "Failed to load: " << path << '\n';
             return -1;
+        }
     }
     return 0;
 }
