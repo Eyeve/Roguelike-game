@@ -9,6 +9,25 @@
 #include <filesystem>
 #include <string>
 
+const std::map<std::string, Textures> fileNameToTextureEnum{
+                {"Basic",        Textures::Basic},
+                {"Troll",        Textures::Troll},
+
+                {"Ceil",         Textures::Ceil},
+                {"Down",         Textures::Down},
+                {"Floor",        Textures::Floor},
+                {"InDownLeft",   Textures::InDownLeft},
+                {"InDownRight",  Textures::InDownRight},
+                {"InUpLeft",     Textures::InUpLeft},
+                {"InUpRight",    Textures::InUpRight},
+                {"Left",         Textures::Left},
+                {"OutDownLeft",  Textures::OutDownLeft},
+                {"OutDownRight", Textures::OutDownRight},
+                {"OutUpLeft",    Textures::OutUpLeft},
+                {"OutUpRight",   Textures::OutUpRight},
+                {"Right",        Textures::Right},
+                {"Up",           Textures::Up}
+};
 TextureManager::TextureManager() {
 
 }
@@ -30,8 +49,10 @@ int TextureManager::init()
     {
         if (entry.is_regular_file()) {
             std::string filePath = entry.path().string();
-            textureMap[entry.path().stem().string()] = sf::Texture();
-            if (!textureMap[entry.path().stem().string()].loadFromFile(filePath))
+            std::string fileName = entry.path().stem().string();
+            Textures texture = fileNameToTextureEnum.at(fileName);
+            textureMap[texture] = sf::Texture();
+            if (!textureMap[texture].loadFromFile(filePath))
             {
                 std::cerr << "Failed to load: " << filePath << '\n';
                 return -1;
@@ -43,7 +64,7 @@ int TextureManager::init()
 }
 
 
-const sf::Texture& TextureManager::getTexture(const std::string& texture)
+const sf::Texture& TextureManager::getTexture(const Textures texture)
 {
     return textureMap[texture];
 }

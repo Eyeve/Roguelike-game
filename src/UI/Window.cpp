@@ -17,7 +17,7 @@ Window::Window(): sprites(WIDTH, std::vector<sf::Sprite>(HEIGHT, sf::Sprite())) 
             auto yPos = static_cast<float>(y * PIXELS_PER_CELL);
             sprites[x][y].setPosition(xPos, yPos);
 
-            sprites[x][y].setTexture(manager.getTexture("Troll"));
+            sprites[x][y].setTexture(manager.getTexture(Textures::Basic));
         }
     }
 }

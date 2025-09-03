@@ -8,10 +8,28 @@
 #include <utility>
 #include <SFML/Graphics.hpp>
 #include <string>
-enum class Textures
-{
-    Wall,
-    Troll
+#include <unordered_map>
+
+enum class Textures {
+    // creature
+    Basic,
+    Troll,
+
+    // tileset
+    Ceil,
+    Down,
+    Floor,
+    InDownLeft,
+    InDownRight,
+    InUpLeft,
+    InUpRight,
+    Left,
+    OutDownLeft,
+    OutDownRight,
+    OutUpLeft,
+    OutUpRight,
+    Right,
+    Up
 };
 
 template<typename T>
@@ -25,10 +43,12 @@ public:
 
     int init();
 
-    const sf::Texture& getTexture(const std::string& texture);
+    const sf::Texture& getTexture(const Textures texture);
 
 private:
-    std::map<std::string, sf::Texture> textureMap;
+    std::map<Textures, sf::Texture> textureMap;
+
+
 };
 
 
