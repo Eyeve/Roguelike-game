@@ -11,6 +11,8 @@ set(SOURCES
         src/UI/Window.h
         src/UI/TextureManager.cpp
         src/UI/TextureManager.h
+        src/world/Cell.cpp
+        src/world/Cell.h
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})

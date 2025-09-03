@@ -9,26 +9,26 @@
 #include <filesystem>
 #include <string>
 
-const std::map<std::string, Textures> fileNameToTextureEnum{
-                {"Basic",        Textures::Basic},
-                {"Troll",        Textures::Troll},
+const std::map<std::string, Texture> fileNameToTextureEnum{
+                {"Basic",        Texture::Basic},
+                {"Troll",        Texture::Troll},
 
-                {"Ceil",         Textures::Ceil},
-                {"Down",         Textures::Down},
-                {"Floor",        Textures::Floor},
-                {"InDownLeft",   Textures::InDownLeft},
-                {"InDownRight",  Textures::InDownRight},
-                {"InUpLeft",     Textures::InUpLeft},
-                {"InUpRight",    Textures::InUpRight},
-                {"Left",         Textures::Left},
-                {"OutDownLeft",  Textures::OutDownLeft},
-                {"OutDownRight", Textures::OutDownRight},
-                {"OutUpLeft",    Textures::OutUpLeft},
-                {"OutUpRight",   Textures::OutUpRight},
-                {"Right",        Textures::Right},
-                {"Up",           Textures::Up}
+                {"Ceil",         Texture::Ceil},
+                {"Down",         Texture::Down},
+                {"Floor",        Texture::Floor},
+                {"InDownLeft",   Texture::InDownLeft},
+                {"InDownRight",  Texture::InDownRight},
+                {"InUpLeft",     Texture::InUpLeft},
+                {"InUpRight",    Texture::InUpRight},
+                {"Left",         Texture::Left},
+                {"OutDownLeft",  Texture::OutDownLeft},
+                {"OutDownRight", Texture::OutDownRight},
+                {"OutUpLeft",    Texture::OutUpLeft},
+                {"OutUpRight",   Texture::OutUpRight},
+                {"Right",        Texture::Right},
+                {"Up",           Texture::Up}
 };
-TextureManager::TextureManager() {
+TextureManager::TextureManager(): textureVec(enumSize<Texture>()) {
 
 }
 
@@ -50,9 +50,8 @@ int TextureManager::init()
         if (entry.is_regular_file()) {
             std::string filePath = entry.path().string();
             std::string fileName = entry.path().stem().string();
-            Textures texture = fileNameToTextureEnum.at(fileName);
-            textureMap[texture] = sf::Texture();
-            if (!textureMap[texture].loadFromFile(filePath))
+            Texture texture = fileNameToTextureEnum.at(fileName); // TODO: except
+            if (!textureVec[std::to_underlying(texture)].loadFromFile(filePath))
             {
                 std::cerr << "Failed to load: " << filePath << '\n';
                 return -1;
@@ -64,7 +63,7 @@ int TextureManager::init()
 }
 
 
-const sf::Texture& TextureManager::getTexture(const Textures texture)
+const sf::Texture& TextureManager::getTexture(const Texture texture)
 {
-    return textureMap[texture];
+    return textureVec[std::to_underlying(texture)];
 }

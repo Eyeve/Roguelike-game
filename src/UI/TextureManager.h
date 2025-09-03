@@ -10,12 +10,10 @@
 #include <string>
 #include <unordered_map>
 
-enum class Textures {
-    // creature
+enum class Texture {
     Basic,
     Troll,
 
-    // tileset
     Ceil,
     Down,
     Floor,
@@ -29,12 +27,14 @@ enum class Textures {
     OutUpLeft,
     OutUpRight,
     Right,
-    Up
+    Up,
+
+    _Size
 };
 
 template<typename T>
 int enumSize() {
-    return std::to_underlying(T::Size);
+    return std::to_underlying(T::_Size);
 }
 
 struct TextureManager {
@@ -43,12 +43,10 @@ public:
 
     int init();
 
-    const sf::Texture& getTexture(const Textures texture);
+    const sf::Texture& getTexture(const Texture texture);
 
 private:
-    std::map<Textures, sf::Texture> textureMap;
-
-
+    std::vector<sf::Texture> textureVec;
 };
 
 
