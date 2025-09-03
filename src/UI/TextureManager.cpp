@@ -15,9 +15,10 @@ TextureManager::TextureManager(): textureVec(magic_enum::enum_values<Textures>()
 int TextureManager::init()
 {
 
-    for (auto t : magic_enum::enum_values<Textures>()) {
+    for (Textures t : magic_enum::enum_values<Textures>()) {
         auto idx_opt = magic_enum::enum_index(t);
-        if (!idx_opt) continue; // на всякий случай
+        if (!idx_opt)
+            continue;
 
         std::size_t idx = *idx_opt;
         std::string path = "../assets/" + std::string(magic_enum::enum_name(t)) + ".png";
