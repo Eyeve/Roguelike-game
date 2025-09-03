@@ -7,10 +7,9 @@
 
 #include <utility>
 #include <SFML/Graphics.hpp>
-
+#include <string>
 enum class Textures
 {
-    Player,
     Wall,
     Troll
 };
@@ -26,10 +25,10 @@ public:
 
     int init();
 
-    const sf::Texture& getTexture(Textures texture);
+    const sf::Texture& getTexture(const std::string& texture);
 
 private:
-    std::vector<sf::Texture> textureVec;
+    std::map<std::string, sf::Texture> textureMap;
 };
 
 
