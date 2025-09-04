@@ -9,6 +9,9 @@ public:
     explicit WorldGenerator(uint32_t seed);
 
     Chunk generate(int32_t x, int32_t y) override;
+
+private:
+
 };
 
 
