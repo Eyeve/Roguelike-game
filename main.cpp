@@ -1,9 +1,22 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+
+#include "TestRoomGenerator.h"
 #include "Window.h"
+#include "World.h"
 
 int main() {
     Window window;
+    TestRoomGenerator gen;
+    TextureManager manager;
+    manager.init();
+    Chunk chunk = gen.generate(0, 0);
+
+    for (int x = 0; x < std::min(Window::WIDTH, Chunk::SIZE); ++x) {
+        for (int y = 0; y < std::min(Window::HEIGHT, Chunk::SIZE); ++y) {
+            window.update(x, y, manager.getTexture(chunk.cells[x][y].texture));
+        }
+    }
     window.eventHandlerLoop();
 
     // sf::RenderWindow window(sf::VideoMode(800, 600), "2D Бродилка");

@@ -1,7 +1,3 @@
-//
-// Created by eyeve on 03.09.2025.
-//
-
 #include "TextureManager.h"
 #include <iostream>
 #include <magic_enum.hpp>
@@ -9,29 +5,29 @@
 #include <filesystem>
 #include <string>
 
-const std::map<std::string, Texture> fileNameToTextureEnum{
-                {"Basic",        Texture::Basic},
-                {"Troll",        Texture::Troll},
+const std::map<std::string, TextureName> fileNameToTextureEnum{
+                {"Basic",        TextureName::Basic},
+                {"Troll",        TextureName::Troll},
 
-                {"Ceil",         Texture::Ceil},
-                {"Down",         Texture::Down},
-                {"Floor",        Texture::Floor},
-                {"InDownLeft",   Texture::InDownLeft},
-                {"InDownRight",  Texture::InDownRight},
-                {"InUpLeft",     Texture::InUpLeft},
-                {"InUpRight",    Texture::InUpRight},
-                {"Left",         Texture::Left},
-                {"OutDownLeft",  Texture::OutDownLeft},
-                {"OutDownRight", Texture::OutDownRight},
-                {"OutUpLeft",    Texture::OutUpLeft},
-                {"OutUpRight",   Texture::OutUpRight},
-                {"Right",        Texture::Right},
-                {"Up",           Texture::Up}
+                {"Ceil",         TextureName::Ceil},
+                {"Down",         TextureName::Down},
+                {"Floor",        TextureName::Floor},
+                {"InDownLeft",   TextureName::InDownLeft},
+                {"InDownRight",  TextureName::InDownRight},
+                {"InUpLeft",     TextureName::InUpLeft},
+                {"InUpRight",    TextureName::InUpRight},
+                {"Left",         TextureName::Left},
+                {"OutDownLeft",  TextureName::OutDownLeft},
+                {"OutDownRight", TextureName::OutDownRight},
+                {"OutUpLeft",    TextureName::OutUpLeft},
+                {"OutUpRight",   TextureName::OutUpRight},
+                {"Right",        TextureName::Right},
+                {"Up",           TextureName::Up}
 };
-TextureManager::TextureManager(): textureVec(enumSize<Texture>()) {
+
+TextureManager::TextureManager(): textureVec(enumSize<TextureName>()) {
 
 }
-
 
 int TextureManager::init()
 {
@@ -50,8 +46,8 @@ int TextureManager::init()
         if (entry.is_regular_file()) {
             std::string filePath = entry.path().string();
             std::string fileName = entry.path().stem().string();
-            Texture texture = fileNameToTextureEnum.at(fileName); // TODO: except
-            if (!textureVec[std::to_underlying(texture)].loadFromFile(filePath))
+            TextureName key = fileNameToTextureEnum.at(fileName); // TODO: except
+            if (!textureVec[std::to_underlying(key)].loadFromFile(filePath))
             {
                 std::cerr << "Failed to load: " << filePath << '\n';
                 return -1;
@@ -63,7 +59,7 @@ int TextureManager::init()
 }
 
 
-const sf::Texture& TextureManager::getTexture(const Texture texture)
+const sf::Texture& TextureManager::getTexture(const TextureName texture)
 {
     return textureVec[std::to_underlying(texture)];
 }

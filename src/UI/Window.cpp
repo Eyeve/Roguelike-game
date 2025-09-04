@@ -17,7 +17,7 @@ Window::Window(): sprites(WIDTH, std::vector<sf::Sprite>(HEIGHT, sf::Sprite())) 
             auto yPos = static_cast<float>(y * PIXELS_PER_CELL);
             sprites[x][y].setPosition(xPos, yPos);
 
-            sprites[x][y].setTexture(manager.getTexture(Texture::Down));
+            sprites[x][y].setTexture(manager.getTexture(TextureName::Ceil));
         }
     }
 }
@@ -41,6 +41,6 @@ void Window::eventHandlerLoop() {
 }
 
 void Window::update(uint32_t x, uint32_t y, const sf::Texture &texture) {
-
+    sprites[x][y].setTexture(texture);
 }
 

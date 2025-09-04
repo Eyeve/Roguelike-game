@@ -27,4 +27,4 @@ private:
 };
 
 
-#endif //ROGUELIKE_GAME_WINDOW_H
+#endif

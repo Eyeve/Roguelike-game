@@ -5,21 +5,28 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-set(SOURCES
+add_executable(${PROJECT_NAME}
         main.cpp
         src/UI/Window.cpp
         src/UI/Window.h
         src/UI/TextureManager.cpp
         src/UI/TextureManager.h
-        src/world/Cell.cpp
-        src/world/Cell.h
+        src/world/Chunk.cpp
+        src/world/Chunk.h
+        src/world/generator/WorldGenerator.cpp
+        src/world/generator/WorldGenerator.h
+        src/world/generator/WorldGeneratorInterface.h
+        src/world/World.cpp
+        src/world/World.h
+        src/world/generator/TestRoomGenerator.cpp
+        src/world/generator/TestRoomGenerator.h
 )
-
-add_executable(${PROJECT_NAME} ${SOURCES})
 
 target_include_directories(${PROJECT_NAME} PRIVATE
         src
         src/UI
+        src/world
+        src/world/generator
 )
 
 include(FetchContent)

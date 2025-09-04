@@ -1,7 +1,3 @@
-//
-// Created by eyeve on 03.09.2025.
-//
-
 #ifndef ROGUELIKE_GAME_UI_H
 #define ROGUELIKE_GAME_UI_H
 
@@ -12,4 +8,4 @@ public:
 };
 
 
-#endif //ROGUELIKE_GAME_UI_H
+#endif
