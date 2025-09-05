@@ -1,11 +1,16 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
+#include "BiomeManager.h"
 #include "TestRoomGenerator.h"
 #include "Window.h"
 #include "World.h"
 
 int main() {
+
+    BiomeManager biomeManager;
+    biomeManager.initialize();
+
     Window window;
     TestRoomGenerator gen;
     TextureManager manager;

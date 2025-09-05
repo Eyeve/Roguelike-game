@@ -9,4 +9,18 @@ consteval int enumSize() {
     return std::to_underlying(T::None);
 }
 
+/*
+{
+  "tile": "Ceil",
+  "up": [
+  ],
+  "right": [
+  ],
+  "down": [
+  ],
+  "left": [
+  ]
+}
+ */
+
 #endif

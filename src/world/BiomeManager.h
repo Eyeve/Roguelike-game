@@ -1,63 +1,58 @@
 #ifndef ROGUELIKE_GAME_BIOME_MANAGER_H
 #define ROGUELIKE_GAME_BIOME_MANAGER_H
 
-#define TT(type) TileType::type
+#include <nlohmann/json.hpp>
 
-#include "Utility.h"
 #include "World.h"
 
 
 struct Rule {
-    TileType condition;
-    std::vector<std::vector<TileType>> bans;
+    TileType tile;
+    bool upRight;
+    bool upLeft;
+    bool downRight;
+    bool downLeft;
 
-    Rule(): condition(), bans(4) {} // TODO: del magic num
-    Rule(TileType condition, const std::vector<std::vector<TileType>>& bans):
-        condition(condition), bans(bans) {}
-};
-
-struct Weight {
-    TileType texture;
-    float weight;
-
-    Weight(): texture(), weight(0.0f) {}
-    Weight(TileType texture, float weight): texture(texture), weight(weight) {}
+    Rule(): tile(TileType::None), upRight(false), upLeft(false), downRight(false), downLeft(false) {}
+    Rule(TileType tile, bool upRight, bool upLeft, bool downRight, bool downLeft):
+        tile(tile), upRight(upRight), upLeft(upLeft), downRight(downRight), downLeft(downLeft) {}
 };
 
 struct Structure {
     float weight;
     std::vector<std::vector<TileType>> tiles;
+
+    Structure(): weight(0.0f), tiles() {}
+    Structure(float weight, const std::vector<std::vector<TileType>>& tiles): weight(weight), tiles(tiles) {};
 };
 
 struct Biome {
-    std::vector<Weight> weights;
-    std::vector<Rule> neighborhoodRules;
+    std::vector<Rule> rules;
     std::vector<Structure> structures;
 
-    Biome(): weights(), neighborhoodRules() {}
-    Biome(const std::vector<Weight>& weights, const std::vector<Rule>& neighborhoodRules, const std::vector<Structure>& structures):
-        weights(weights), neighborhoodRules(neighborhoodRules), structures(structures) {}
+    Biome(): rules(), structures() {}
+    Biome(const std::vector<Rule>& rules, const std::vector<Structure>& structures): rules(rules), structures(structures) {}
 };
 
-enum class BiomeName {
+enum class BiomeType {
     Cave,
 
     None
 };
 
-class BiomeManager: public ManagerInterface<BiomeName, Biome> {
+class BiomeManager: public ManagerInterface<BiomeType, Biome> {
 
 public:
     BiomeManager();
 
 protected:
     int init() override;
-    const Biome& getHandler(BiomeName name) override;
+    const Biome& getHandler(BiomeType name) override;
 
 private:
     std::vector<Biome> biomes;
 
-    void addBiome(BiomeName name, const std::vector<Weight>& weights, const std::vector<Rule>& neighborhoodRules);
+    void addBiome(const nlohmann::json& biomesConfig, BiomeType biomeType, const std::string& name);
 };
 
 #endif

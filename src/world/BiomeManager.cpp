@@ -1,46 +1,64 @@
-#include "BiomeManager.h"
+#include <fstream>
 
+#include "BiomeManager.h"
 #include "Utility.h"
 
 
-BiomeManager::BiomeManager(): biomes(enumSize<BiomeName>()) {
+BiomeManager::BiomeManager(): biomes(enumSize<BiomeType>()) {
 
 }
 
 int BiomeManager::init() {
-    addBiome(
-        BiomeName::Cave,
-        {
-            Weight(TileType::Floor, 1),
-            Weight(TileType::Ceil, 1),
-        },
-        {
-            Rule(
-                TT(Ceil),
-                {{TT(Down), TT(Floor), TT(Left), TT(Right),                                          TT(InUpLeft), TT(InUpRight), TT(OutUpRight), TT(OutUpLeft), TT(OutDownRight), TT(OutDownLeft)},
-                { TT(Down), TT(Floor), TT(Left),            TT(Up),                 TT(InDownRight), TT(InUpRight), TT(OutUpRight), TT(OutUpLeft), TT(OutDownRight), TT(OutDownLeft)},
-                {           TT(Floor), TT(Left), TT(Right), TT(Up), TT(InDownLeft), TT(InDownRight), TT(OutUpRight), TT(OutUpLeft), TT(OutDownRight), TT(OutDownLeft)},
-                { TT(Down), TT(Floor),           TT(Right), TT(Up), TT(InDownLeft),                  TT(InUpLeft), TT(OutUpRight), TT(OutUpLeft), TT(OutDownRight), TT(OutDownLeft)}}
-            ),
-            Rule(
-                TT(Floor),
-                {{TT(Ceil)},
-                {TT(Ceil), TT(Down),},
-                {TT(Ceil), TT(Down),},
-                {TT(Ceil), TT(Down),}}
-            )
-        }
-    );
+    nlohmann::json config;
+    std::ifstream in("../config/config.json");
+
+    in >> config;
+    const nlohmann::json& biomesConfig = config["biomes"];
+
+    addBiome(biomesConfig, BiomeType::Cave, "Cave");
     return 0;
 }
 
-const Biome& BiomeManager::getHandler(BiomeName name) {
+const Biome& BiomeManager::getHandler(BiomeType name) {
     return biomes[std::to_underlying(name)];
 }
 
-void BiomeManager::addBiome(BiomeName name, const std::vector<Weight> &weights, const std::vector<Rule> &neighborhoodRules) {
-    Biome& ref = biomes[std::to_underlying(name)];
-    ref.weights = weights;
-    ref.neighborhoodRules = neighborhoodRules;
+NLOHMANN_JSON_SERIALIZE_ENUM(TileType, {
+    {TileType::Floor, "Floor"},
+    {TileType::Ceil, "Ceil"},
+    {TileType::Up, "Up"},
+    {TileType::Right, "Right"},
+    {TileType::Down, "Down"},
+    {TileType::Left, "Left"},
+    {TileType::InUpRight, "InUpRight"},
+    {TileType::InUpLeft, "InUpLeft"},
+    {TileType::InDownRight, "InDownRight"},
+    {TileType::InDownLeft, "InDownLeft"},
+    {TileType::OutUpRight, "OutUpRight"},
+    {TileType::OutUpLeft, "OutUpLeft"},
+    {TileType::OutDownRight, "OutDownRight"},
+    {TileType::OutDownLeft, "OutDownLeft"},
+    {TileType::None, "None"}
+})
+
+void BiomeManager::addBiome(const nlohmann::json& biomesConfig, BiomeType biomeType, const std::string& name) {
+    Biome& biome = biomes[std::to_underlying(biomeType)];
+    const nlohmann::json& biomeConfig = biomesConfig[name];
+
+    for (auto& rule: biomeConfig["rules"]) {
+        biome.rules.emplace_back(
+            rule["tile"].get<TileType>(),
+            rule["upRight"].get<bool>(),
+            rule["upLeft"].get<bool>(),
+            rule["downRight"].get<bool>(),
+            rule["downLeft"].get<bool>()
+        );
+    }
+    for (auto& structure: biomeConfig["structures"]) {
+        biome.structures.emplace_back(
+            structure["weight"].get<float>(),
+            structure["tiles"].get<std::vector<std::vector<TileType>>>()
+        );
+    }
 }
 

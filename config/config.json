@@ -1,0 +1,271 @@
+{
+  "name": "config",
+  "version": "1.0.0",
+  "description": "",
+  "biomes": {
+    "Cave": {
+      "rules": [
+        {
+          "tile": "Floor",
+          "upRight": true,
+          "upLeft": true,
+          "downRight": true,
+          "downLeft": true
+        },
+        {
+          "tile": "Ceil",
+          "upRight": false,
+          "upLeft": false,
+          "downRight": false,
+          "downLeft": false
+        },
+        {
+          "tile": "Up",
+          "upRight": true,
+          "upLeft": true,
+          "downRight": false,
+          "downLeft": false
+        },
+        {
+          "tile": "Right",
+          "upRight": true,
+          "upLeft": false,
+          "downRight": true,
+          "downLeft": false
+        },
+        {
+          "tile": "Down",
+          "upRight": false,
+          "upLeft": false,
+          "downRight": true,
+          "downLeft": true
+        },
+        {
+          "tile": "Left",
+          "upRight": false,
+          "upLeft": true,
+          "downRight": false,
+          "downLeft": true
+        },
+        {
+          "tile": "InUpRight",
+          "upRight": false,
+          "upLeft": false,
+          "downRight": false,
+          "downLeft": true
+        },
+        {
+          "tile": "InUpLeft",
+          "upRight": false,
+          "upLeft": false,
+          "downRight": true,
+          "downLeft": false
+        },
+        {
+          "tile": "InDownRight",
+          "upRight": false,
+          "upLeft": true,
+          "downRight": false,
+          "downLeft": false
+        },
+        {
+          "tile": "InDownLeft",
+          "upRight": true,
+          "upLeft": false,
+          "downRight": false,
+          "downLeft": false
+        },
+        {
+          "tile": "OutUpRight",
+          "upRight": true,
+          "upLeft": true,
+          "downRight": true,
+          "downLeft": false
+        },
+        {
+          "tile": "OutUpLeft",
+          "upRight": true,
+          "upLeft": true,
+          "downRight": false,
+          "downLeft": true
+        },
+        {
+          "tile": "OutDownRight",
+          "upRight": true,
+          "upLeft": false,
+          "downRight": true,
+          "downLeft": true
+        },
+        {
+          "tile": "OutDownLeft",
+          "upRight": false,
+          "upLeft": true,
+          "downRight": true,
+          "downLeft": true
+        }
+      ],
+      "structures": [
+        {
+          "tiles": [
+            [
+              "Floor"
+            ]
+          ],
+          "weight": 1.0
+        },
+        {
+          "tiles": [
+            [
+              "Ceil"
+            ]
+          ],
+          "weight": 1.0
+        },
+        {
+          "tiles": [
+            [
+              "Down"
+            ],
+            [
+              "Floor"
+            ]
+          ],
+          "weight": 1.0
+        },
+        {
+          "tiles": [
+            [
+              "Floor"
+            ],
+            [
+              "Up"
+            ]
+          ],
+          "weight": 1.0
+        },
+        {
+          "tiles": [
+            [
+              "Right",
+              "Floor"
+            ]
+          ],
+          "weight": 1.0
+        },
+        {
+          "tiles": [
+            [
+              "Floor",
+              "Left"
+            ]
+          ],
+          "weight": 1.0
+        },
+        {
+          "tiles": [
+            [
+              "None",
+              "Floor"
+            ],
+            [
+              "InDownLeft",
+              "None"
+            ]
+          ],
+          "weight": 1.0
+        },
+        {
+          "tiles": [
+            [
+              "Floor",
+              "None"
+            ],
+            [
+              "None",
+              "InDownRight"
+            ]
+          ],
+          "weight": 1.0
+        },
+        {
+          "tiles": [
+            [
+              "InUpLeft",
+              "None"
+            ],
+            [
+              "None",
+              "Floor"
+            ]
+          ],
+          "weight": 1.0
+        },
+        {
+          "tiles": [
+            [
+              "None",
+              "InUpRight"
+            ],
+            [
+              "Floor",
+              "None"
+            ]
+          ],
+          "weight": 1.0
+        },
+        {
+          "tiles": [
+            [
+              "Floor",
+              "OutDownLeft"
+            ],
+            [
+              "Floor",
+              "Floor"
+            ]
+          ],
+          "weight": 1.0
+        },
+        {
+          "tiles": [
+            [
+              "OutDownRight",
+              "Floor"
+            ],
+            [
+              "Floor",
+              "Floor"
+            ]
+          ],
+          "weight": 1.0
+        },
+        {
+          "tiles": [
+            [
+              "Floor",
+              "Floor"
+            ],
+            [
+              "Floor",
+              "OutUpLeft"
+            ]
+          ],
+          "weight": 1.0
+        },
+        {
+          "tiles": [
+            [
+              "Floor",
+              "Floor"
+            ],
+            [
+              "OutUpRight",
+              "Floor"
+            ]
+          ],
+          "weight": 1.0
+        }
+      ]
+    }
+  }
+}
