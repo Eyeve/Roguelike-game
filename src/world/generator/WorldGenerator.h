@@ -6,12 +6,12 @@
 #include "WorldGeneratorInterface.h"
 
 
-struct CellInfo {
+struct TileInfo {
     static constexpr uint8_t LEN = 14;
 
     float entropy = 0.0f;
     uint8_t len = LEN;
-    std::array<Cell, LEN> variants = {};
+    std::array<Tile, LEN> variants = {};
 };
 
 

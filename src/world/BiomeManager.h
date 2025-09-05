@@ -5,20 +5,20 @@
 
 
 struct Rule {
-    TextureName condition;
-    TextureName ban;
+    TileType condition;
+    TileType possible;
     Direction dir;
 
-    Rule(): condition(), ban(), dir(Direction::Up) {}
-    Rule(TextureName condition, TextureName ban, Direction dir): condition(condition), ban(ban), dir(dir) {}
+    Rule(): condition(), possible(), dir(Direction::Up) {}
+    Rule(TileType condition, TileType possible, Direction dir): condition(condition), possible(possible), dir(dir) {}
 };
 
 struct Weight {
-    TextureName texture;
+    TileType texture;
     float weight;
 
     Weight(): texture(), weight(0.0f) {}
-    Weight(TextureName texture, float weight): texture(texture), weight(weight) {}
+    Weight(TileType texture, float weight): texture(texture), weight(weight) {}
 };
 
 struct Biome {

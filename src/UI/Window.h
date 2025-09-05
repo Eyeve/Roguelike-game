@@ -10,7 +10,7 @@ class Window {
 public:
     static constexpr uint32_t HEIGHT = 21;
     static constexpr uint32_t WIDTH = 41;
-    static constexpr uint32_t PIXELS_PER_CELL = 8;
+    static constexpr uint32_t PIXELS_PER_TILE = 8;
     static constexpr uint32_t FRAME_LIMIT = 60;
     static constexpr const char* TITLE = "Game";
 

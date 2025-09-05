@@ -2,53 +2,71 @@
 #include <utility>
 #include <filesystem>
 #include <string>
+#include <unordered_map>
+
 
 #include "Utility.h"
+#include "TileManager.h"
 #include "TextureManager.h"
 
 
-const std::map<std::string, TextureName> fileToTextureName{
-                {"Basic",        TextureName::Basic},
-                {"Troll",        TextureName::Troll},
-
-                {"Ceil",         TextureName::Ceil},
-                {"Down",         TextureName::Down},
-                {"Floor",        TextureName::Floor},
-                {"InDownLeft",   TextureName::InDownLeft},
-                {"InDownRight",  TextureName::InDownRight},
-                {"InUpLeft",     TextureName::InUpLeft},
-                {"InUpRight",    TextureName::InUpRight},
-                {"Left",         TextureName::Left},
-                {"OutDownLeft",  TextureName::OutDownLeft},
-                {"OutDownRight", TextureName::OutDownRight},
-                {"OutUpLeft",    TextureName::OutUpLeft},
-                {"OutUpRight",   TextureName::OutUpRight},
-                {"Right",        TextureName::Right},
-                {"Up",           TextureName::Up}
-};
-
-TextureManager::TextureManager(): textureVec(enumSize<TextureName>()) {
+TextureManager::TextureManager(): textures(enumSize<TextureType>()) {
 
 }
 
 int TextureManager::init()
 {
-    const std::filesystem::path root = "../assets";
+    static std::unordered_map<std::string, TileType> tileset = {
+        {"Ceil",         TileType::Ceil},
+        {"Down",         TileType::Down},
+        {"Floor",        TileType::Floor},
+        {"InDownLeft",   TileType::InDownLeft},
+        {"InDownRight",  TileType::InDownRight},
+        {"InUpLeft",     TileType::InUpLeft},
+        {"InUpRight",    TileType::InUpRight},
+        {"Left",         TileType::Left},
+        {"OutDownLeft",  TileType::OutDownLeft},
+        {"OutDownRight", TileType::OutDownRight},
+        {"OutUpLeft",    TileType::OutUpLeft},
+        {"OutUpRight",   TileType::OutUpRight},
+        {"Right",        TileType::Right},
+        {"Up",           TileType::Up},
+    };
 
-    if (!std::filesystem::exists(root)) {
-        std::cerr << "Folder is not found " << root << '\n';
+    if (textureSearch<TileType>("tileset", TextureType::Tileset, tileset))
+        return -1;
+
+    return 0;
+}
+
+
+const sf::Texture& TextureManager::getHandler(const TextureKey name)
+{
+    return textures[name.type][name.id];
+}
+
+template<typename T>
+int TextureManager::textureSearch(const std::string& directory, TextureType type, std::unordered_map<std::string, T> map) {
+    std::vector<sf::Texture>& ref = textures[std::to_underlying(type)];
+    const std::filesystem::path path = "../assets/" + directory;
+
+    if (!std::filesystem::exists(path)) {
+        std::cerr << "Folder is not found " << path << '\n';
         return 1;
     }
 
+    ref.resize(enumSize<T>());
+
     for (const auto& entry :
-         std::filesystem::recursive_directory_iterator(root,
-                                          std::filesystem::directory_options::skip_permission_denied))
+         std::filesystem::recursive_directory_iterator(path,
+                                          std::filesystem::directory_options::skip_permission_denied)) // TODO: redo
     {
         if (entry.is_regular_file()) {
             std::string filePath = entry.path().string();
-            std::string fileName = entry.path().stem().string();
-            TextureName name = fileToTextureName.at(fileName); // TODO: except
-            if (!textureVec[std::to_underlying(name)].loadFromFile(filePath))
+            std::string name = entry.path().stem().string();
+            int id = std::to_underlying(map.at(name)); // TODO: except
+
+            if (!ref[id].loadFromFile(filePath))
             {
                 std::cerr << "Failed to load: " << filePath << '\n';
                 return -1;
@@ -59,8 +77,3 @@ int TextureManager::init()
     return 0;
 }
 
-
-const sf::Texture& TextureManager::getHandler(const TextureName name)
-{
-    return textureVec[std::to_underlying(name)];
-}

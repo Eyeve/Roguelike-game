@@ -1,13 +1,13 @@
 #ifndef ROGUELIKE_GAME_TEST_ROOM_GENERATOR_H
 #define ROGUELIKE_GAME_TEST_ROOM_GENERATOR_H
 
-#define ROW(name1, name2, name3, name4) std::array<TextureName, 4> {TextureName::name1, TextureName::name2, TextureName::name3, TextureName::name4}
+#define ROW(name1, name2, name3, name4) std::array<TileType, 4> {TileType::name1, TileType::name2, TileType::name3, TileType::name4}
 
 #include "WorldGeneratorInterface.h"
 
 class TestRoomGenerator: public WorldGeneratorInterface {
 public:
-    static constexpr std::array<std::array<TextureName, 4>, 4> ROOM = {
+    static constexpr std::array<std::array<TileType, 4>, 4> ROOM = {
         ROW(InUpLeft, Down, Down, InUpRight),
         ROW(Right, Floor, Floor, Left),
         ROW(Right, Floor, Floor, Left),

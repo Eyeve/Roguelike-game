@@ -1,10 +1,11 @@
 #include <SFML/Graphics.hpp>
 
 #include "Window.h"
+#include "TileManager.h"
 
 
 Window::Window(): sprites(WIDTH, std::vector<sf::Sprite>(HEIGHT, sf::Sprite())) {
-    sf::VideoMode videoMode(PIXELS_PER_CELL * WIDTH, PIXELS_PER_CELL * HEIGHT);
+    sf::VideoMode videoMode(PIXELS_PER_TILE * WIDTH, PIXELS_PER_TILE * HEIGHT);
     window.create(videoMode, TITLE);
     window.setFramerateLimit(FRAME_LIMIT);
     view = window.getDefaultView();
@@ -13,11 +14,11 @@ Window::Window(): sprites(WIDTH, std::vector<sf::Sprite>(HEIGHT, sf::Sprite())) 
 
     for (uint32_t x = 0; x < WIDTH; ++x) {
         for (uint32_t y = 0; y < HEIGHT; ++y) {
-            auto xPos = static_cast<float>(x * PIXELS_PER_CELL);
-            auto yPos = static_cast<float>(y * PIXELS_PER_CELL);
-            sprites[x][y].setPosition(xPos, yPos);
+            auto xPos = static_cast<float>(x * PIXELS_PER_TILE);
+            auto yPos = static_cast<float>(y * PIXELS_PER_TILE);
 
-            sprites[x][y].setTexture(manager.get(TextureName::Ceil));
+            sprites[x][y].setPosition(xPos, yPos);
+            sprites[x][y].setTexture(manager.get({TextureType::Tileset, TileType::Ceil}));
         }
     }
 }

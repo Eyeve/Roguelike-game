@@ -29,16 +29,12 @@ void WorldGenerator::updateGen(int32_t x, int32_t y) {
 
 
 Chunk WorldGenerator::noDependenciesGeneration(int32_t xChunk, int32_t yChunk) {
+    std::array<std::array<TileInfo, Chunk::SIZE>, Chunk::SIZE> tileInfo = {};
+    std::uniform_int_distribution<int32_t> dist(0, Chunk::SIZE);
 
-    std::array<std::array<CellInfo, Chunk::SIZE>, Chunk::SIZE> cellsInfo = {};
+    int32_t x = dist(gen);
+    int32_t y = dist(gen);
 
-    std::uniform_int_distribution<uint32_t> dist(0, 10);
-
-    for (int32_t x = 0; x < Chunk::SIZE; ++x) {
-        for (int32_t y = 0; y < Chunk::SIZE; ++y) {
-
-        }
-    }
 }
 
 Chunk WorldGenerator::verticalDependenceGeneration(int32_t xChunk, int32_t yChunk) {

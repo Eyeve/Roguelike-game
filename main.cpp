@@ -14,7 +14,7 @@ int main() {
 
     for (int x = 0; x < std::min(Window::WIDTH, Chunk::SIZE); ++x) {
         for (int y = 0; y < std::min(Window::HEIGHT, Chunk::SIZE); ++y) {
-            window.update(x, y, manager.get(chunk.cells[x][y].texture));
+            window.update(x, y, manager.get({TextureType::Tileset, chunk.tiles[x][y].type}));
         }
     }
     window.eventHandlerLoop();

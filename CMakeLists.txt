@@ -20,10 +20,10 @@ add_executable(${PROJECT_NAME}
         src/world/World.h
         src/world/generator/TestRoomGenerator.cpp
         src/world/generator/TestRoomGenerator.h
-        src/world/CellManager.h
+        src/world/TileManager.h
         src/world/BiomeManager.h
         src/world/BiomeManager.cpp
-        src/world/CellManager.cpp
+        src/world/TileManager.cpp
         src/utility/ManagerInterface.h
         src/utility/Utility.h
 )

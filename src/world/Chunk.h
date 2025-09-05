@@ -4,12 +4,12 @@
 #include <array>
 
 #include "TextureManager.h"
-#include "CellManager.h"
+#include "TileManager.h"
 
 
 struct Chunk {
     static constexpr uint32_t SIZE = 32;
-    std::array<std::array<Cell, SIZE>, SIZE> cells;
+    std::array<std::array<Tile, SIZE>, SIZE> tiles;
 };
 
 

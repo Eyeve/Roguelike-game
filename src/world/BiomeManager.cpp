@@ -11,22 +11,23 @@ int BiomeManager::init() {
     addBiome(
         BiomeName::Cave,
         {
-            Weight(TextureName::Floor, 1),
-            Weight(TextureName::Ceil, 1),
-            Weight(TextureName::Up, 1),
-            Weight(TextureName::Down, 1),
-            Weight(TextureName::Right, 1),
-            Weight(TextureName::Left, 1),
-            Weight(TextureName::OutUpRight, 1),
-            Weight(TextureName::OutUpLeft, 1),
-            Weight(TextureName::OutDownRight, 1),
-            Weight(TextureName::OutDownLeft, 1),
-            Weight(TextureName::InUpRight, 1),
-            Weight(TextureName::InUpLeft, 1),
-            Weight(TextureName::InDownRight, 1),
-            Weight(TextureName::InDownLeft, 1),
+            Weight(TileType::Floor, 1),
+            Weight(TileType::Ceil, 1),
+            Weight(TileType::Up, 1),
+            Weight(TileType::Down, 1),
+            Weight(TileType::Right, 1),
+            Weight(TileType::Left, 1),
+            Weight(TileType::OutUpRight, 1),
+            Weight(TileType::OutUpLeft, 1),
+            Weight(TileType::OutDownRight, 1),
+            Weight(TileType::OutDownLeft, 1),
+            Weight(TileType::InUpRight, 1),
+            Weight(TileType::InUpLeft, 1),
+            Weight(TileType::InDownRight, 1),
+            Weight(TileType::InDownLeft, 1),
         },
         {
+            Rule()
         }
     );
     return 0;
