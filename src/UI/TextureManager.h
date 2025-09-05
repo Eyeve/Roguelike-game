@@ -1,12 +1,12 @@
 #ifndef ROGUELIKE_GAME_TEXTURE_MANAGER_H
 #define ROGUELIKE_GAME_TEXTURE_MANAGER_H
 
-
 #include <SFML/Graphics.hpp>
 #include <utility>
 #include <unordered_map>
 
 #include "ManagerInterface.h"
+
 
 enum class TextureType {
     Tileset,
@@ -35,7 +35,7 @@ private:
     std::vector<std::vector<sf::Texture>> textures;
 
     template<typename T>
-    int textureSearch(const std::string& directory, TextureType type, std::unordered_map<std::string, T> map);
+    int textureSearch(const std::string& directory, TextureType type, const std::unordered_map<std::string, T>& map);
 };
 
 #endif

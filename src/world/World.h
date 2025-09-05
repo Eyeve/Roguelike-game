@@ -8,11 +8,11 @@
 #include "WorldGeneratorInterface.h"
 
 
-enum class Direction {
+enum class Direction { // TODO: Move to utility
     Up,
+    Right,
     Down,
     Left,
-    Right,
     Up_Right,
     Up_Left,
     Down_Right,

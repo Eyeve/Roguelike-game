@@ -5,7 +5,7 @@
 
 
 template<typename T>
-int enumSize() {
+consteval int enumSize() {
     return std::to_underlying(T::None);
 }
 

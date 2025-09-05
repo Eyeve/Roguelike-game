@@ -46,7 +46,7 @@ const sf::Texture& TextureManager::getHandler(const TextureKey name)
 }
 
 template<typename T>
-int TextureManager::textureSearch(const std::string& directory, TextureType type, std::unordered_map<std::string, T> map) {
+int TextureManager::textureSearch(const std::string& directory, TextureType type, const std::unordered_map<std::string, T>& map) {
     std::vector<sf::Texture>& ref = textures[std::to_underlying(type)];
     const std::filesystem::path path = "../assets/" + directory;
 
@@ -73,7 +73,6 @@ int TextureManager::textureSearch(const std::string& directory, TextureType type
             }
         }
     }
-
     return 0;
 }
 
