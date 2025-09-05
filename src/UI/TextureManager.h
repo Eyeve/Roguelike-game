@@ -1,8 +1,10 @@
-#ifndef ROGUELIKE_GAME_TEXTUREMANAGER_H
-#define ROGUELIKE_GAME_TEXTUREMANAGER_H
+#ifndef ROGUELIKE_GAME_TEXTURE_MANAGER_H
+#define ROGUELIKE_GAME_TEXTURE_MANAGER_H
 
-#include <utility>
+
 #include <SFML/Graphics.hpp>
+
+#include "ManagerInterface.h"
 
 enum class TextureName {
     Basic,
@@ -26,22 +28,16 @@ enum class TextureName {
     None
 };
 
-template<typename T>
-int enumSize() {
-    return std::to_underlying(T::None);
-}
-
-struct TextureManager {
+class TextureManager: public ManagerInterface<TextureName, sf::Texture> {
 public:
     TextureManager();
 
-    int init();
-
-    const sf::Texture& getTexture(TextureName texture);
+protected:
+    int init() override;
+    const sf::Texture& getHandler(TextureName name) override;
 
 private:
     std::vector<sf::Texture> textureVec;
 };
-
 
 #endif

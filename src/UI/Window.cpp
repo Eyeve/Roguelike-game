@@ -9,7 +9,7 @@ Window::Window(): sprites(WIDTH, std::vector<sf::Sprite>(HEIGHT, sf::Sprite())) 
     window.setFramerateLimit(FRAME_LIMIT);
     view = window.getDefaultView();
 
-    manager.init();
+    manager.initialize();
 
     for (uint32_t x = 0; x < WIDTH; ++x) {
         for (uint32_t y = 0; y < HEIGHT; ++y) {
@@ -17,7 +17,7 @@ Window::Window(): sprites(WIDTH, std::vector<sf::Sprite>(HEIGHT, sf::Sprite())) 
             auto yPos = static_cast<float>(y * PIXELS_PER_CELL);
             sprites[x][y].setPosition(xPos, yPos);
 
-            sprites[x][y].setTexture(manager.getTexture(TextureName::Ceil));
+            sprites[x][y].setTexture(manager.get(TextureName::Ceil));
         }
     }
 }

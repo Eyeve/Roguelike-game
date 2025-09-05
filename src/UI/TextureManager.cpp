@@ -1,11 +1,13 @@
-#include "TextureManager.h"
 #include <iostream>
-#include <magic_enum.hpp>
 #include <utility>
 #include <filesystem>
 #include <string>
 
-const std::map<std::string, TextureName> fileNameToTextureEnum{
+#include "Utility.h"
+#include "TextureManager.h"
+
+
+const std::map<std::string, TextureName> fileToTextureName{
                 {"Basic",        TextureName::Basic},
                 {"Troll",        TextureName::Troll},
 
@@ -31,7 +33,6 @@ TextureManager::TextureManager(): textureVec(enumSize<TextureName>()) {
 
 int TextureManager::init()
 {
-
     const std::filesystem::path root = "../assets";
 
     if (!std::filesystem::exists(root)) {
@@ -46,8 +47,8 @@ int TextureManager::init()
         if (entry.is_regular_file()) {
             std::string filePath = entry.path().string();
             std::string fileName = entry.path().stem().string();
-            TextureName key = fileNameToTextureEnum.at(fileName); // TODO: except
-            if (!textureVec[std::to_underlying(key)].loadFromFile(filePath))
+            TextureName name = fileToTextureName.at(fileName); // TODO: except
+            if (!textureVec[std::to_underlying(name)].loadFromFile(filePath))
             {
                 std::cerr << "Failed to load: " << filePath << '\n';
                 return -1;
@@ -59,7 +60,7 @@ int TextureManager::init()
 }
 
 
-const sf::Texture& TextureManager::getTexture(const TextureName texture)
+const sf::Texture& TextureManager::getHandler(const TextureName name)
 {
-    return textureVec[std::to_underlying(texture)];
+    return textureVec[std::to_underlying(name)];
 }

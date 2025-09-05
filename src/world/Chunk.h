@@ -4,10 +4,7 @@
 #include <array>
 
 #include "TextureManager.h"
-
-struct Cell {
-    TextureName texture = TextureName::None;
-};
+#include "CellManager.h"
 
 
 struct Chunk {

@@ -9,12 +9,12 @@ int main() {
     Window window;
     TestRoomGenerator gen;
     TextureManager manager;
-    manager.init();
+    manager.initialize();
     Chunk chunk = gen.generate(0, 0);
 
     for (int x = 0; x < std::min(Window::WIDTH, Chunk::SIZE); ++x) {
         for (int y = 0; y < std::min(Window::HEIGHT, Chunk::SIZE); ++y) {
-            window.update(x, y, manager.getTexture(chunk.cells[x][y].texture));
+            window.update(x, y, manager.get(chunk.cells[x][y].texture));
         }
     }
     window.eventHandlerLoop();

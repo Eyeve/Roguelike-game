@@ -1,5 +1,5 @@
-#ifndef ROGUELIKE_GAME_TESTROOMGENERATOR_H
-#define ROGUELIKE_GAME_TESTROOMGENERATOR_H
+#ifndef ROGUELIKE_GAME_TEST_ROOM_GENERATOR_H
+#define ROGUELIKE_GAME_TEST_ROOM_GENERATOR_H
 
 #define ROW(name1, name2, name3, name4) std::array<TextureName, 4> {TextureName::name1, TextureName::name2, TextureName::name3, TextureName::name4}
 

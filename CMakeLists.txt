@@ -20,13 +20,20 @@ add_executable(${PROJECT_NAME}
         src/world/World.h
         src/world/generator/TestRoomGenerator.cpp
         src/world/generator/TestRoomGenerator.h
+        src/world/CellManager.h
+        src/world/BiomeManager.h
+        src/world/BiomeManager.cpp
+        src/world/CellManager.cpp
+        src/utility/ManagerInterface.h
+        src/utility/Utility.h
 )
 
-target_include_directories(${PROJECT_NAME} PRIVATE
+include_directories(${PROJECT_NAME}
         src
         src/UI
         src/world
         src/world/generator
+        src/utility
 )
 
 include(FetchContent)
@@ -43,8 +50,6 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(sfml)
 
-
-
 FetchContent_Declare(
         magic_enum
         GIT_REPOSITORY https://github.com/Neargye/magic_enum.git
@@ -59,6 +64,7 @@ target_link_libraries(${PROJECT_NAME}
         sfml-system
         magic_enum::magic_enum
 )
+
 if(WIN32)
     target_compile_definitions(${PROJECT_NAME} PRIVATE SFML_STATIC)
 
@@ -71,5 +77,3 @@ if(WIN32)
 elseif(UNIX AND NOT APPLE)
     find_package(X11 REQUIRED)
 endif()
-
-
