@@ -19,7 +19,7 @@ int BiomeManager::init() {
     return 0;
 }
 
-const Biome& BiomeManager::getHandler(BiomeType name) {
+const Biome& BiomeManager::getHandler(BiomeType name) const {
     return biomes[std::to_underlying(name)];
 }
 

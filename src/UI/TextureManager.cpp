@@ -40,7 +40,7 @@ int TextureManager::init()
 }
 
 
-const sf::Texture& TextureManager::getHandler(const TextureKey name)
+const sf::Texture& TextureManager::getHandler(TextureKey name) const
 {
     return textures[name.type][name.id];
 }

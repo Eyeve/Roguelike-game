@@ -47,7 +47,7 @@ public:
 
 protected:
     int init() override;
-    const Biome& getHandler(BiomeType name) override;
+    const Biome& getHandler(BiomeType name) const override;
 
 private:
     std::vector<Biome> biomes;

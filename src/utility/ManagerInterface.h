@@ -11,13 +11,13 @@ public:
     virtual ~ManagerInterface() = default;
 
     int initialize();
-    const T& get(Key key);
+    const T& get(Key key) const;
 
 protected:
     ManagerInterface();
 
     virtual int init() = 0;
-    virtual const T& getHandler(Key key) = 0;
+    virtual const T& getHandler(Key key) const = 0;
 
 private:
     bool initialized;
@@ -37,7 +37,7 @@ int ManagerInterface<Key, T>::initialize() {
 }
 
 template<typename Key, typename T>
-const T& ManagerInterface<Key, T>::get(Key key) {
+const T& ManagerInterface<Key, T>::get(Key key) const {
     if (!initialized)
         std::cerr << "ManagerInterface not initialized!\n";
     return getHandler(key);

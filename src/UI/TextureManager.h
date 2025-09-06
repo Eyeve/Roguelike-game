@@ -29,7 +29,7 @@ public:
 
 protected:
     int init() override;
-    const sf::Texture& getHandler(TextureKey name) override;
+    const sf::Texture& getHandler(TextureKey name) const override;
 
 private:
     std::vector<std::vector<sf::Texture>> textures;
