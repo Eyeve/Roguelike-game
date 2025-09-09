@@ -1,36 +1,34 @@
-#include <iostream>
-#include <utility>
 #include <filesystem>
+#include <iostream>
 #include <string>
 #include <unordered_map>
+#include <utility>
 
-
-#include "Utility.h"
-#include "TileManager.h"
 #include "TextureManager.h"
+#include "TileManager.h"
+#include "Utility.h"
 
-
-TextureManager::TextureManager(): textures(enumSize<TextureType>()) {
-
+TextureManager::TextureManager() : textures(enumSize<TextureType>())
+{
 }
 
 int TextureManager::init()
 {
     static std::unordered_map<std::string, TileType> tileset = {
-        {"Ceil",         TileType::Ceil},
-        {"Down",         TileType::Down},
-        {"Floor",        TileType::Floor},
-        {"InDownLeft",   TileType::InDownLeft},
-        {"InDownRight",  TileType::InDownRight},
-        {"InUpLeft",     TileType::InUpLeft},
-        {"InUpRight",    TileType::InUpRight},
-        {"Left",         TileType::Left},
-        {"OutDownLeft",  TileType::OutDownLeft},
+        {"Ceil", TileType::Ceil},
+        {"Down", TileType::Down},
+        {"Floor", TileType::Floor},
+        {"InDownLeft", TileType::InDownLeft},
+        {"InDownRight", TileType::InDownRight},
+        {"InUpLeft", TileType::InUpLeft},
+        {"InUpRight", TileType::InUpRight},
+        {"Left", TileType::Left},
+        {"OutDownLeft", TileType::OutDownLeft},
         {"OutDownRight", TileType::OutDownRight},
-        {"OutUpLeft",    TileType::OutUpLeft},
-        {"OutUpRight",   TileType::OutUpRight},
-        {"Right",        TileType::Right},
-        {"Up",           TileType::Up},
+        {"OutUpLeft", TileType::OutUpLeft},
+        {"OutUpRight", TileType::OutUpRight},
+        {"Right", TileType::Right},
+        {"Up", TileType::Up},
     };
 
     if (textureSearch<TileType>("tileset", TextureType::Tileset, tileset))
@@ -39,29 +37,32 @@ int TextureManager::init()
     return 0;
 }
 
-
 const sf::Texture& TextureManager::getHandler(TextureKey name) const
 {
     return textures[name.type][name.id];
 }
 
-template<typename T>
-int TextureManager::textureSearch(const std::string& directory, TextureType type, const std::unordered_map<std::string, T>& map) {
+template <typename T>
+int TextureManager::textureSearch(const std::string& directory, TextureType type,
+                                  const std::unordered_map<std::string, T>& map)
+{
     std::vector<sf::Texture>& ref = textures[std::to_underlying(type)];
     const std::filesystem::path path = "../assets/" + directory;
 
-    if (!std::filesystem::exists(path)) {
+    if (!std::filesystem::exists(path))
+    {
         std::cerr << "Folder is not found " << path << '\n';
         return 1;
     }
 
     ref.resize(enumSize<T>());
 
-    for (const auto& entry :
-         std::filesystem::recursive_directory_iterator(path,
-                                          std::filesystem::directory_options::skip_permission_denied)) // TODO: redo
+    for (const auto& entry : std::filesystem::recursive_directory_iterator(
+             path, std::filesystem::directory_options::skip_permission_denied))
+    // TODO: redo
     {
-        if (entry.is_regular_file()) {
+        if (entry.is_regular_file())
+        {
             std::string filePath = entry.path().string();
             std::string name = entry.path().stem().string();
             int id = std::to_underlying(map.at(name)); // TODO: except
@@ -75,4 +76,3 @@ int TextureManager::textureSearch(const std::string& directory, TextureType type
     }
     return 0;
 }
-

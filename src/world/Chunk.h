@@ -6,11 +6,10 @@
 #include "TextureManager.h"
 #include "TileManager.h"
 
-
-struct Chunk {
+struct Chunk
+{
     static constexpr uint32_t SIZE = 32;
     std::array<std::array<Tile, SIZE>, SIZE> tiles;
 };
-
 
 #endif

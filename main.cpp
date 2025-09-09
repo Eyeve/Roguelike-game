@@ -6,7 +6,8 @@
 #include "Window.h"
 #include "World.h"
 
-int main() {
+int main()
+{
 
     BiomeManager biomeManager;
     biomeManager.initialize();
@@ -17,8 +18,10 @@ int main() {
     manager.initialize();
     Chunk chunk = gen.generate(0, 0);
 
-    for (int x = 0; x < std::min(Window::WIDTH, Chunk::SIZE); ++x) {
-        for (int y = 0; y < std::min(Window::HEIGHT, Chunk::SIZE); ++y) {
+    for (int x = 0; x < std::min(Window::WIDTH, Chunk::SIZE); ++x)
+    {
+        for (int y = 0; y < std::min(Window::HEIGHT, Chunk::SIZE); ++y)
+        {
             window.update(x, y, manager.get({TextureType::Tileset, chunk.tiles[x][y].type}));
         }
     }

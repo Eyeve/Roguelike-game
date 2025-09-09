@@ -1,8 +1,8 @@
 #ifndef ROGUELIKE_GAME_TILE_MANAGER_H
 #define ROGUELIKE_GAME_TILE_MANAGER_H
 
-
-enum class TileType {
+enum class TileType
+{
     Ceil,
     Down,
     Floor,
@@ -21,14 +21,18 @@ enum class TileType {
     None
 };
 
-struct Tile {
-
+struct Tile
+{
     TileType type;
 
-    Tile(): type(TileType::None) {}
-    explicit Tile(TileType type): type(type) {}
-};
+    Tile() : type(TileType::None)
+    {
+    }
 
+    explicit Tile(TileType type) : type(type)
+    {
+    }
+};
 
 // class CellManager: public ManagerInterface<CellType, Cell> {
 //
@@ -39,6 +43,5 @@ struct Tile {
 //     int init() override;
 //     const Cell& getHandler(CellType key) override;
 // };
-
 
 #endif

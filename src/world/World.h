@@ -1,14 +1,15 @@
 #ifndef ROGUELIKE_GAME_WORLD_H
 #define ROGUELIKE_GAME_WORLD_H
 
-#include <unordered_map>
 #include <SFML/System/Vector2.hpp>
+#include <unordered_map>
 
 #include "Chunk.h"
 #include "WorldGeneratorInterface.h"
 
-
-enum class Direction { // TODO: Move to utility
+enum class Direction
+{
+    // TODO: Move to utility
     Up,
     Right,
     Down,
@@ -21,11 +22,14 @@ enum class Direction { // TODO: Move to utility
     None,
 };
 
-class World {
-public:
+class World
+{
+    friend class WorldGeneratorInterface;
+
+  public:
     explicit World(const WorldGeneratorInterface& gen);
 
-private:
+  private:
     std::unordered_map<sf::Vector2<int32_t>, Chunk> chunks;
 };
 

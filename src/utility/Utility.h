@@ -3,9 +3,8 @@
 
 #include <utility>
 
-
-template<typename T>
-consteval int enumSize() {
+template <typename T> consteval int enumSize()
+{
     return std::to_underlying(T::None);
 }
 

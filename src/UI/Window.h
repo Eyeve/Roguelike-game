@@ -5,9 +5,9 @@
 
 #include "TextureManager.h"
 
-
-class Window {
-public:
+class Window
+{
+  public:
     static constexpr uint32_t HEIGHT = 21;
     static constexpr uint32_t WIDTH = 41;
     static constexpr uint32_t PIXELS_PER_TILE = 8;
@@ -17,14 +17,14 @@ public:
     Window();
 
     void eventHandlerLoop();
+
     void update(uint32_t x, uint32_t y, const sf::Texture& texture);
 
-private:
+  private:
     sf::RenderWindow window;
     sf::View view;
     std::vector<std::vector<sf::Sprite>> sprites;
     TextureManager manager;
 };
-
 
 #endif

@@ -3,16 +3,18 @@
 
 #include "Chunk.h"
 
-
-class WorldGeneratorInterface {
-
-public:
+class WorldGeneratorInterface
+{
+  public:
     virtual Chunk generate(int32_t xChunk, int32_t yChunk) = 0;
 
-protected:
+  protected:
     uint32_t seed;
 
-    explicit WorldGeneratorInterface(uint32_t seed): seed(seed) {}
+    explicit WorldGeneratorInterface(uint32_t seed) : seed(seed)
+    {
+    }
+
     virtual ~WorldGeneratorInterface() = default;
 };
 

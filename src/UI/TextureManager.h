@@ -2,39 +2,44 @@
 #define ROGUELIKE_GAME_TEXTURE_MANAGER_H
 
 #include <SFML/Graphics.hpp>
-#include <utility>
 #include <unordered_map>
+#include <utility>
 
 #include "ManagerInterface.h"
 
-
-enum class TextureType {
+enum class TextureType
+{
     Tileset,
     Creature,
 
     None
 };
 
-struct TextureKey {
+struct TextureKey
+{
     int type;
     int id;
 
     template <typename T>
-    TextureKey(TextureType type, T name): type(std::to_underlying(type)), id(std::to_underlying(name)) {}
+    TextureKey(TextureType type, T name) : type(std::to_underlying(type)), id(std::to_underlying(name))
+    {
+    }
 };
 
-class TextureManager: public ManagerInterface<TextureKey, sf::Texture> {
-public:
+class TextureManager : public ManagerInterface<TextureKey, sf::Texture>
+{
+  public:
     TextureManager();
 
-protected:
+  protected:
     int init() override;
+
     const sf::Texture& getHandler(TextureKey name) const override;
 
-private:
+  private:
     std::vector<std::vector<sf::Texture>> textures;
 
-    template<typename T>
+    template <typename T>
     int textureSearch(const std::string& directory, TextureType type, const std::unordered_map<std::string, T>& map);
 };
 

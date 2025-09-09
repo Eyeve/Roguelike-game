@@ -1,9 +1,8 @@
 #ifndef ROGUELIKE_GAME_ENGINE_H
 #define ROGUELIKE_GAME_ENGINE_H
 
-
-class Engine {
+class Engine
+{
 };
 
-
-#endif //ROGUELIKE_GAME_ENGINE_H
+#endif // ROGUELIKE_GAME_ENGINE_H
